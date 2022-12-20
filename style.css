@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 #form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -85,6 +89,14 @@
   #form {
     grid-template-columns: 100%;
   }
+
+  .form_group label {
+    flex: 0 0;
+  }
+  .form_side {
+    padding: 20px;
+  }
+
   .form_group {
     justify-content: space-between;
   }
