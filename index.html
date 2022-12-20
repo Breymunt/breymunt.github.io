@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор</title>
+    <link rel="shortcut icon" href="./karkas_group.ico" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <form id="form">
+      <div class="form_side">
+        <p>Введення данних для розрахунку</p>
+        <div>
+          <div class="form_group">
+            Ширина B, м:
+            <input type="text" name="width" required autocomplete="off" />
+          </div>
+          <div class="form_group">
+            Довжина L, м:
+            <input type="text" name="length" required autocomplete="off" />
+          </div>
+          <div class="form_group">
+            Висота H, м:
+            <input type="text" name="height" required autocomplete="off" />
+          </div>
+          <div class="form_group">
+            Сніговий район A:
+            <select name="snow_area" required="required">
+              <option disabled selected value="">Вибрати район</option>
+              <option value="1">1-й</option>
+              <option value="2">2-й</option>
+              <option value="3">3-й</option>
+              <option value="4">4-й</option>
+              <option value="5">5-й</option>
+              <option value="6">6-й</option>
+            </select>
+          </div>
+          <div class="btn"><button>Розрахувати</button></div>
+        </div>
+      </div>
+      <div class="form_side right">
+        <p>Результат розрахунку</p>
+        <div>
+          <div class="form_group">
+            Площа забудови: <input type="text" id="square" readonly />
+          </div>
+          <div class="form_group">
+            Вартість робіт: <input type="text" id="work" readonly />
+          </div>
+          <div class="form_group">
+            Підсумкова вартість:
+            <input type="text" id="out" readonly />
+          </div>
+          <div class="form_group">
+            Вартість м2:
+            <input type="text" id="square_meter" readonly />
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="dist/main.js"></script>
+  </body>
+</html>
