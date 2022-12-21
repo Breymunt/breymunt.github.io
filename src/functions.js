@@ -149,7 +149,7 @@ export function calcBaza(width, length) {
   const zakladPrice = consts.prokat * zakladAmount;
   const kosynkiPrice = prokat["200x150x10"] * kosynkiAmount;
 
-  console.log(`Конструкція бази колон - ` + count + ` шт`);
+  console.log(`Конструкція бази колон`);
   console.log(`Закладна пластина ${consts.type} - ${zakladAmount}` + ` шт;`);
   console.log(`Ребра жорсті - ${kosynkiAmount}` + ` шт;`);
 
