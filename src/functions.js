@@ -39,13 +39,13 @@ export function calcWork(width, length) {
 function getFm1Consts(width) {
   if (width <= 20) {
     return {
-      arm: 38.66,
+      arm: 38.86,
       anker: 0,
       beton: 1.04,
     };
   } else if (width <= 24) {
     return {
-      arm: 49.24,
+      arm: 49.96,
       anker: 0,
       beton: 1.8,
     };
@@ -62,9 +62,9 @@ export function calcFm1(width, length) {
   const count = length / 3 + 2;
   const consts = getFm1Consts(width);
 
-  const arm12Amount = Math.ceil((count * consts.arm + 96 + 64) / 12) * 12;
+  const arm12Amount = Math.ceil((count * consts.arm + 84) / 12) * 12;
   const ankerAmount = Math.ceil(count * consts.anker);
-  const betonAmount = Math.ceil(count * consts.beton + 1.04);
+  const betonAmount = Math.ceil(count * consts.beton);
 
   const arm12Price = arm[12] * arm12Amount;
   const ankerPrice = anker[24] * ankerAmount;
@@ -103,7 +103,7 @@ export function calcLenta(width, length) {
   const consts = getLentaConsts(width);
 
   const arm10Amount =
-    Math.ceil((count * consts.arm * 2 + count * 10 + 96) / 12) * 12;
+    Math.ceil((count * consts.arm * 2 + count * 10 + 84) / 12) * 12;
   const betonAmount = Math.ceil(count * consts.beton * 1.04);
 
   const arm10Price = arm[10] * arm10Amount;
@@ -121,16 +121,19 @@ function getBazaConsts(width) {
   if (width <= 18) {
     return {
       kosynki: 4,
+      type: "550x550x12",
       prokat: prokat["550x550x12"],
     };
   } else if (width <= 24) {
     return {
       kosynki: 6,
+      type: "600x600x12",
       prokat: prokat["600x600x12"],
     };
   } else if (width <= 30) {
     return {
       kosynki: 6,
+      type: "650x650x12",
       prokat: prokat["650x650x12"],
     };
   }
@@ -147,7 +150,7 @@ export function calcBaza(width, length) {
   const kosynkiPrice = prokat["200x150x10"] * kosynkiAmount;
 
   console.log(`Конструкція бази колон - ` + count + ` шт`);
-  console.log(`Закладна пластина - ${zakladAmount}` + ` шт;`);
+  console.log(`Закладна пластина ${consts.type} - ${zakladAmount}` + ` шт;`);
   console.log(`Ребра жорсті - ${kosynkiAmount}` + ` шт;`);
 
   return zakladPrice + kosynkiPrice;
@@ -158,30 +161,17 @@ function getKolonyConsts(width) {
   if (width <= 18) {
     return {
       kolona: kolona[219],
+      type: 219,
     };
   } else if (width <= 24) {
     return {
       kolona: kolona[273],
+      type: 273,
     };
   } else if (width <= 30) {
     return {
       kolona: kolona[325],
-    };
-  }
-}
-
-function kolonaType(width) {
-  if (width <= 18) {
-    return {
-      kolona: 219,
-    };
-  } else if (width <= 24) {
-    return {
-      kolona: 273,
-    };
-  } else if (width <= 30) {
-    return {
-      kolona: 325,
+      type: 325,
     };
   }
 }
@@ -189,7 +179,6 @@ function kolonaType(width) {
 export function calcKolony(width, length, height) {
   const count = length / 3 + 2;
   const consts = getKolonyConsts(width);
-  const k = kolonaType(width);
 
   const kolonyAmount = count;
 
@@ -197,23 +186,38 @@ export function calcKolony(width, length, height) {
   const kolonyPrice = consts.kolona * totalKolonyAmount;
 
   console.log(`Кількість колон - ` + count + ` шт`);
-  console.log(`Колона ${k.kolona} - ${totalKolonyAmount}` + ` м.п.;`);
+  console.log(`Колона ${consts.type} - ${totalKolonyAmount}` + ` м.п.;`);
 
   return kolonyPrice;
 }
 
 function getStiykyConsts(width) {
-  if (width <= 18) {
+  if (width == 16) {
     return {
-      s1: 0,
-      s2: 0,
+      s1: 9.4 + 24,
+      s2: 3.2 - 10,
     };
-  } else if (width <= 24) {
+  } else if (width == 18) {
     return {
-      s1: 0,
-      s2: 0,
+      s1: 10.8 + 24,
+      s2: 3.6 - 10,
     };
-  } else if (width <= 30) {
+  } else if (width == 20) {
+    return {
+      s1: 11.64 + 24,
+      s2: 5 - 10,
+    };
+  } else if (width == 22) {
+    return {
+      s1: 14.16 + 24,
+      s2: 14.28 - 10,
+    };
+  } else if (width == 24) {
+    return {
+      s1: 15.6 + 24,
+      s2: 10.8 - 10,
+    };
+  } else if (width == 30) {
     return {
       s1: 15.92 + 24,
       s2: 15.48 - 10,
@@ -222,12 +226,27 @@ function getStiykyConsts(width) {
 }
 
 function getStiykyCount(width) {
-  if (width <= 18) {
+  if (width == 16) {
     return {
-      s1: 0,
-      s2: 0,
+      s1: 8,
+      s2: 2,
     };
-  } else if (width <= 24) {
+  } else if (width == 18) {
+    return {
+      s1: 8,
+      s2: 2,
+    };
+  } else if (width == 20) {
+    return {
+      s1: 8,
+      s2: 2,
+    };
+  } else if (width == 22) {
+    return {
+      s1: 8,
+      s2: 6,
+    };
+  } else if (width == 24) {
     return {
       s1: 8,
       s2: 6,
@@ -241,15 +260,27 @@ function getStiykyCount(width) {
 }
 
 function getStiykyHeight(width) {
-  if (width <= 18) {
+  if (width == 16) {
     return {
-      s2: 0,
+      s2: 0.81,
     };
-  } else if (width <= 24) {
+  } else if (width == 18) {
     return {
-      s2: 0,
+      s2: 0.91,
     };
-  } else if (width <= 30) {
+  } else if (width == 20) {
+    return {
+      s2: 0.33,
+    };
+  } else if (width == 22) {
+    return {
+      s2: 1.11,
+    };
+  } else if (width == 24) {
+    return {
+      s2: 1.21,
+    };
+  } else if (width == 30) {
     return {
       s2: 0.82,
     };
@@ -283,14 +314,17 @@ function getVerhConsts(width) {
   if (width <= 18) {
     return {
       prokat: prokat["250x250x10"],
+      type: "250x250x10",
     };
   } else if (width <= 24) {
     return {
       prokat: prokat["300x300x10"],
+      type: "300x300x10",
     };
   } else if (width <= 30) {
     return {
       prokat: prokat["350x350x10"],
+      type: "350x350x10",
     };
   }
 }
@@ -303,7 +337,7 @@ export function calcVerh(width, length) {
 
   const verhPrice = consts.prokat * verhAmount;
 
-  console.log(`Верх колон - ` + count + ` шт`);
+  console.log(`Верх колон ${consts.type} - ` + count + ` шт`);
 
   return verhPrice;
 }
@@ -429,31 +463,66 @@ export function calcFermy(width, length, snowArea) {
 
 //Горизонтальні в'язи жорсткості
 function getHorizontalCount(width, length) {
-  if (width <= 30) {
+  if (width <= 24) {
+    return {
+      horizontCount: 4,
+    };
+  } else if (width == 30) {
     return {
       horizontCount: Math.ceil(length / 60),
-      longCount: 5,
     };
   }
 }
 
 function getHorizontalConsts(width) {
-  if (width <= 30) {
+  if (width == 16) {
+    return {
+      horizontConsts: 48,
+      constant: 0,
+      longCount: 4,
+    };
+  } else if (width == 18) {
+    return {
+      horizontConsts: 60,
+      constant: 0,
+      longCount: 4,
+    };
+  } else if (width == 20) {
+    return {
+      horizontConsts: 54,
+      constant: 0,
+      longCount: 4,
+    };
+  } else if (width == 22) {
+    return {
+      horizontConsts: 62,
+      constant: 0,
+      longCount: 4,
+    };
+  } else if (width == 24) {
+    return {
+      horizontConsts: 74,
+      constant: 0,
+      longCount: 6,
+    };
+  } else if (width == 30) {
     return {
       horizontConsts: 36,
+      constant: 19.75,
+      longCount: 5,
     };
   }
 }
 
 export function calcHorizontal(width, length) {
-  const count = getHorizontalCount(width, length);
   const consts = getHorizontalConsts(width);
+  const count = getVerticalCount(length);
 
   const horizontalT1Amount =
     Math.ceil(
-      ((length / 6) * 19.75 +
-        length * count.longCount +
-        count.horizontCount * consts.horizontConsts +
+      ((length / 6) * consts.constant +
+        length * consts.longCount +
+        (count.vertCount / 2) * consts.horizontConsts +
         24) /
         12
     ) * 12;
@@ -461,9 +530,9 @@ export function calcHorizontal(width, length) {
   const horizontalT1Price = truba["60x60x3"] * horizontalT1Amount;
 
   console.log(
-    `Горизонтальних в'язів жорсткості (змійок) - ` + count.horizontCount + ` шт`
+    `Горизонтальних в'язів жорсткості (змійок) - ` + count.vertCount / 2 + ` шт`
   );
-  console.log(`Поздовжніх - ` + count.longCount + ` шт`);
+  console.log(`Поздовжніх - ` + consts.longCount + ` шт`);
   console.log(`Труба 60х60х3 - ${horizontalT1Amount}` + ` м.п.;`);
 
   return horizontalT1Price;
@@ -471,7 +540,32 @@ export function calcHorizontal(width, length) {
 
 //Покрівельна обрешітка
 function getRoofPurlinsConsts(width) {
-  if (width <= 30) {
+  if (width == 16) {
+    return {
+      longCount: 12,
+      stock: 24,
+    };
+  } else if (width == 18) {
+    return {
+      longCount: 14,
+      stock: 24,
+    };
+  } else if (width == 20) {
+    return {
+      longCount: 16,
+      stock: 24,
+    };
+  } else if (width == 22) {
+    return {
+      longCount: 16,
+      stock: 24,
+    };
+  } else if (width == 24) {
+    return {
+      longCount: 18,
+      stock: 24,
+    };
+  } else if (width == 30) {
     return {
       longCount: 22,
       stock: 24,
@@ -485,7 +579,7 @@ function getTypeShveler(snowArea) {
       sh: shveler[12],
       type: "Швелер №12",
     };
-  } else if ((snowArea = 6)) {
+  } else if (snowArea == 6) {
     return {
       sh: shveler[14],
       type: "Швелер №14",
@@ -509,7 +603,37 @@ export function calcRoofPurlins(width, length, snowArea) {
 
 //Стінова обрешітка
 function getWallPurlinsConsts(width, height) {
-  if ((width = 30)) {
+  if (width == 16) {
+    return {
+      h: height - 0.5 - 0.46 + 0.8,
+      c: 48,
+    };
+  }
+  if (width == 18) {
+    return {
+      h: height - 0.5 - 0.46 + 0.9,
+      c: 60,
+    };
+  }
+  if (width == 20) {
+    return {
+      h: height - 0.5 - 0.46 + 0.3,
+      c: 96,
+    };
+  }
+  if (width == 22) {
+    return {
+      h: height - 0.5 - 0.46 + 1.1,
+      c: 72,
+    };
+  }
+  if (width == 24) {
+    return {
+      h: height - 0.5 - 0.46 + 1.2,
+      c: 84,
+    };
+  }
+  if (width == 30) {
     return {
       h: height - 0.5 - 0.46 + 0.8,
       c: 120,
@@ -538,7 +662,7 @@ function getReshitkyConsts(width) {
     return {
       r: 4,
     };
-  } else if (width <= 30) {
+  } else if (width == 30) {
     return {
       r: 6,
     };
@@ -591,27 +715,32 @@ export function calcGates(width) {
 }
 //Профнастил покрівельний
 function getRoofConsts(width) {
-  if (width <= 18) {
+  if (width == 16) {
+    return {
+      l: 8.54,
+      k: 0.219,
+    };
+  } else if (width == 18) {
     return {
       l: 9.55,
       k: 0.219,
     };
-  } else if (width <= 20) {
+  } else if (width == 20) {
     return {
-      l: 10.7,
+      l: 10.74,
       k: 0.273,
     };
-  } else if (width <= 22) {
+  } else if (width == 22) {
     return {
       l: 11.56,
       k: 0.273,
     };
-  } else if (width <= 24) {
+  } else if (width == 24) {
     return {
       l: 12.86,
       k: 0.273,
     };
-  } else if (width <= 30) {
+  } else if (width == 30) {
     return {
       l: 15.9,
       k: 0.325,
@@ -621,7 +750,13 @@ function getRoofConsts(width) {
 
 //Профнастил стіновий
 function getWallConsts(width) {
-  if (width == 18) {
+  if (width == 16) {
+    return {
+      c: 5.71,
+      h: 0.8,
+      k: 0.219,
+    };
+  } else if (width == 18) {
     return {
       c: 5.71,
       h: 0.9,
@@ -654,7 +789,7 @@ function getWallConsts(width) {
   }
 }
 
-export function calcSheathing(width, length, height) {
+export function calcSheathings(width, length, height) {
   //Профнастил покрівельний
 
   const constsR = getRoofConsts(width);

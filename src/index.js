@@ -14,7 +14,7 @@ import {
   calcWallPurlins,
   calcVenting,
   calcGates,
-  calcSheathing,
+  calcSheathings,
   materials,
 } from "./functions";
 
@@ -25,7 +25,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   const form = new FormData(e.target);
   const width = parseInt(form.get("width"));
   const length = parseInt(form.get("length"));
-  const height = parseInt(form.get("height"));
+  const height = parseFloat(form.get("height"));
   const snowArea = parseInt(form.get("snow_area"));
 
   const workPrice = calcWork(width, length);
@@ -45,7 +45,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
     calcWallPurlins(width, length, height) +
     calcVenting(width, length) +
     calcGates(width) +
-    calcSheathing(width, length, height) +
+    calcSheathings(width, length, height) +
     materials(width, length) +
     workPrice;
 

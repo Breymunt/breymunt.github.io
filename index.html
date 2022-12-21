@@ -1,72 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Калькулятор</title>
-    <link rel="shortcut icon" href="./karkas_group.ico"/>
-    <link href="style.css" rel="stylesheet"/>
-</head>
-<body>
-<form id="form">
-    <div class="form_side">
+    <link rel="shortcut icon" href="./karkas_group.ico" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <form id="form">
+      <div class="form_side">
         <p>Введення данних для розрахунку</p>
         <div>
-            <div class="form_group">
-                <label for="width">Ширина B, м:</label>
-                <input id="width" type="text" name="width" required autocomplete="off"/>
-            </div>
-            <div class="form_group">
-                <label for="length">Довжина L, м:</label>
-                <input id="length" type="text" name="length" required autocomplete="off"/>
-            </div>
-            <div class="form_group">
-                <label for="height">Висота H, м:</label>
-                <input id="height" type="text" name="height" required autocomplete="off"/>
-            </div>
-            <div class="form_group">
-                <label for="snow_area">Сніговий район A:</label>
-                <select id="snow_area" name="snow_area" required="required">
-                    <option disabled selected value="">Вибрати район</option>
-                    <option value="1">1-й</option>
-                    <option value="2">2-й</option>
-                    <option value="3">3-й</option>
-                    <option value="4">4-й</option>
-                    <option value="5">5-й</option>
-                    <option value="6">6-й</option>
-                </select>
-            </div>
-            <div class="btn">
-                <button>Розрахувати</button>
-            </div>
+          <div class="form_group">
+            <label for="width">Ширина B, м:</label>
+            <input
+              id="width"
+              type="number"
+              name="width"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="form_group">
+            <label for="length">Довжина L, м:</label>
+            <input
+              id="length"
+              type="number"
+              step="6"
+              name="length"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="form_group">
+            <label for="height">Висота H, м:</label>
+            <input
+              id="height"
+              type="number"
+              step="0.1"
+              name="height"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="form_group">
+            <label for="snow_area">Сніговий район A:</label>
+            <select id="snow_area" name="snow_area" required="required">
+              <option disabled selected value="">Вибрати район</option>
+              <option value="1">1-й</option>
+              <option value="2">2-й</option>
+              <option value="3">3-й</option>
+              <option value="4">4-й</option>
+              <option value="5">5-й</option>
+              <option value="6">6-й</option>
+            </select>
+          </div>
+          <div class="btn">
+            <button>Розрахувати</button>
+          </div>
         </div>
-    </div>
-    <div class="form_side right">
+      </div>
+      <div class="form_side right">
         <p>Результат розрахунку</p>
         <div>
-            <div class="form_group">
-                <label for="square">
-                    Площа забудови:
-                </label>
-                <input type="text" id="square" readonly/>
-            </div>
-            <div class="form_group">
-                <label for="work">Вартість робіт:</label>
-                <input type="text" id="work" readonly/>
-            </div>
-            <div class="form_group">
-                <label for="out">Підсумкова вартість:</label>
-                <input type="text" id="out" readonly/>
-            </div>
-            <div class="form_group">
-                <label for="square_meter">Вартість м2:</label>
-                <input type="text" id="square_meter" readonly/>
-            </div>
+          <div class="form_group">
+            <label for="square"> Площа забудови: </label>
+            <input type="text" id="square" readonly />
+          </div>
+          <div class="form_group">
+            <label for="work">Вартість робіт:</label>
+            <input type="text" id="work" readonly />
+          </div>
+          <div class="form_group">
+            <label for="out">Підсумкова вартість:</label>
+            <input type="text" id="out" readonly />
+          </div>
+          <div class="form_group">
+            <label for="square_meter">Вартість м2:</label>
+            <input type="text" id="square_meter" readonly />
+          </div>
         </div>
-    </div>
-</form>
-<img id="map" src="./map.jpg" alt=""/>
-<script src="dist/main.js"></script>
-</body>
+      </div>
+    </form>
+    <img id="map" src="./map.jpg" alt="" />
+    <script src="dist/main.js"></script>
+  </body>
 </html>
