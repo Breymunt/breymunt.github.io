@@ -3,12 +3,15 @@ body {
 }
 
 #form {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   font-size: 18px;
   font-family: Arial;
-  max-width: 1240px;
-  margin: 0 auto;
 }
 
 .form_group {
@@ -86,7 +89,7 @@ body {
 }
 
 @media screen and (max-width: 900px) {
-  #form {
+  .form {
     grid-template-columns: 100%;
   }
 
