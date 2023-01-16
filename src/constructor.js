@@ -19,13 +19,13 @@ export function mainCalculations(type) {
     case 1:
       return calcStorageWithoutSuport;
     case 2:
-      alert("2");
+      alert("В розробці");
       break;
     case 3:
-      alert("3");
+      alert("В розробці");
       break;
     case 4:
-      alert("4");
+      alert("В розробці");
       break;
   }
 }
