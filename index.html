@@ -11,12 +11,22 @@
   <body>
     <form id="form">
       <div class="form_radio_group">
-        <p>
-          <input type="radio" name="type" value="1" /> Склад без опори
-          <input type="radio" name="type" value="2" /> Склад з опорою
-          <input type="radio" name="type" value="3" /> Навіс без опори
-          <input type="radio" name="type" value="3" /> Навіс з опорою
-        </p>
+        <div class="radio">
+          <input id="type_1" type="radio" name="type" value="1" checked />
+          <label for="type_1"> Склад без опори</label>
+        </div>
+        <div class="radio">
+          <input disabled id="type_2" type="radio" name="type" value="2" />
+          <label for="type_2"> Склад з опорою</label>
+        </div>
+        <div class="radio">
+          <input id="type_3" type="radio" name="type" value="3" />
+          <label for="type_3"> Навіс без опори</label>
+        </div>
+        <div class="radio">
+          <input disabled id="type_4" type="radio" name="type" value="4" />
+          <label for="type_4">Навіс з опорою</label>
+        </div>
       </div>
       <div class="form">
         <div class="form_side">

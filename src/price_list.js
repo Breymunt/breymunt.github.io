@@ -87,3 +87,8 @@ export const work = {
   sklad: 660,
   navis: 500,
 };
+
+export const materials = {
+  sklad: 75,
+  navis: 65,
+};

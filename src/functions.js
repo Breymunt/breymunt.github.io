@@ -17,8 +17,6 @@ import {
   plita,
   work,
 } from "./price_list";
-import fermyznach from "./fermy";
-import fermy_zapas from "./fermy_zapas";
 
 export function calcSquare(width, length) {
   const square = width * length;
@@ -934,7 +932,7 @@ export function calcSheathings(width, length, height) {
 //Підпірна стінка
 
 //Витратні матеріали
-export function materials(width, length) {
+export function calcMaterials(width, length) {
   const square = width * length;
 
   const materialsPrice = Math.ceil((square * 75) / 10000) * 10000;

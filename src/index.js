@@ -1,24 +1,8 @@
-import {
-  calcSquare,
-  calcWork,
-  calcFm1,
-  calcLenta,
-  calcBaza,
-  calcKolony,
-  calcStiyky,
-  calcVerh,
-  calcVertical,
-  calcFermy,
-  calcHorizontal,
-  calcRoofPurlins,
-  calcWallPurlins,
-  calcVenting,
-  calcGates,
-  calcSheathings,
-  materials,
-} from "./functions";
+import { calcSquare, calcWork } from "./functions";
 
 import { priceFormat, numberFormat } from "./helpers";
+
+import { mainCalculations } from "./constructor";
 
 document.getElementById("form").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -27,27 +11,15 @@ document.getElementById("form").addEventListener("submit", function (e) {
   const length = parseInt(form.get("length"));
   const height = parseFloat(form.get("height"));
   const snowArea = parseInt(form.get("snow_area"));
+  const type = parseInt(form.get("type"));
+  console.log(type);
+
+  const calcFunction = mainCalculations(type);
 
   const workPrice = calcWork(width, length);
 
   let sum = 0;
-  sum +=
-    calcFm1(width, length) +
-    calcLenta(width, length) +
-    calcBaza(width, length) +
-    calcKolony(width, length, height) +
-    calcStiyky(width, length, height) +
-    calcVerh(width, length) +
-    calcVertical(length, height) +
-    calcFermy(width, length, snowArea) +
-    calcHorizontal(width, length) +
-    calcRoofPurlins(width, length, snowArea) +
-    calcWallPurlins(width, length, height) +
-    calcVenting(width, length) +
-    calcGates(width) +
-    calcSheathings(width, length, height) +
-    materials(width, length) +
-    workPrice;
+  sum += calcFunction(width, length, height, snowArea) + workPrice;
 
   const square = document.getElementById("square");
   square.value = numberFormat(calcSquare(width, length)) + " м2";
