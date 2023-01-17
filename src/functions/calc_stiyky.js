@@ -1,5 +1,4 @@
 //Cтійки склади без опори
-
 import { truba } from "../price_list";
 
 function getStiykyConsts(width) {

@@ -1,8 +1,8 @@
-import { calcSquare, calcWork } from "./functions";
+import { mainCalculations } from "./constructor";
+
+import { calcWorkPrice } from "./functions/calc_work_price";
 
 import { priceFormat, numberFormat } from "./helpers";
-
-import { mainCalculations } from "./constructor";
 
 document.getElementById("form").addEventListener("submit", function (e) {
   e.preventDefault();
@@ -12,14 +12,19 @@ document.getElementById("form").addEventListener("submit", function (e) {
   const height = parseFloat(form.get("height"));
   const snowArea = parseInt(form.get("snow_area"));
   const type = parseInt(form.get("type"));
-  console.log(type);
 
   const calcFunction = mainCalculations(type);
 
-  const workPrice = calcWork(width, length);
+  const workPrice = calcWorkPrice(width, length, type);
+
+  function calcSquare(width, length) {
+    const square = width * length;
+
+    return square;
+  }
 
   let sum = 0;
-  sum += calcFunction(width, length, height, snowArea) + workPrice;
+  sum += calcFunction(width, length, height, snowArea, type) + workPrice;
 
   const square = document.getElementById("square");
   square.value = numberFormat(calcSquare(width, length)) + " м2";

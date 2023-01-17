@@ -1,18 +1,6 @@
 //Вентиляційне вікно
 import { truba, polik, reshitka } from "../price_list";
 
-function getReshitkyConsts(width) {
-  if (width <= 24) {
-    return {
-      r: 4,
-    };
-  } else if (width == 30) {
-    return {
-      r: 6,
-    };
-  }
-}
-
 export function calcVenting(width, length) {
   const count = length / 1.5 + 2;
   const consts = getReshitkyConsts(width);
@@ -28,7 +16,19 @@ export function calcVenting(width, length) {
   console.log("Конструкція вентиляційної системи");
   console.log(`Труба 40х40х3 - ${trubaAmount}` + ` м.п.;`);
   console.log(`Полікарбонат - ${polikAmount}` + ` м.п.;`);
-  console.log(`Вент.решітка - ${reshitkaAmount}` + ` шт;`);
+  console.log(`Автоматична решітка - ${reshitkaAmount}` + ` шт;`);
 
   return trubaPrice + polikPrice + reshitkaPrice;
+}
+
+function getReshitkyConsts(width) {
+  if (width <= 24) {
+    return {
+      r: 4,
+    };
+  } else if (width == 30) {
+    return {
+      r: 6,
+    };
+  }
 }

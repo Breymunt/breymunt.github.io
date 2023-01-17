@@ -1,6 +1,40 @@
 //Горизонтальні в'язи жорсткості
 import { truba } from "../price_list";
 
+export function calcHorizontalWithout(width, length) {
+  const x = getVerticalCount(length);
+
+  let count;
+
+  switch (width) {
+    case 30:
+      count = Math.ceil(length / 60);
+      break;
+
+    default:
+      count = x.vertCount / 2;
+  }
+
+  const consts = getHorizontalConsts(width);
+
+  const horizontalT1Amount =
+    Math.ceil(
+      ((length / 6) * consts.constant +
+        length * consts.longCount +
+        count * consts.horizontConsts +
+        24) /
+        12
+    ) * 12;
+
+  const horizontalT1Price = truba["60x60x3"] * horizontalT1Amount;
+
+  console.log(`Горизонтальних в'язів жорсткості (змійок) - ` + count + ` шт`);
+  console.log(`Поздовжніх - ` + consts.longCount + ` шт`);
+  console.log(`Труба 60х60х3 - ${horizontalT1Amount}` + ` м.п.;`);
+
+  return horizontalT1Price;
+}
+
 function getVerticalCount(length) {
   if (length <= 30) {
     return {
@@ -67,38 +101,4 @@ function getHorizontalConsts(width) {
       longCount: 5,
     };
   }
-}
-
-export function calcHorizontal(width, length) {
-  const x = getVerticalCount(length);
-
-  let count;
-
-  switch (width) {
-    case 30:
-      count = Math.ceil(length / 60);
-      break;
-
-    default:
-      count = x.vertCount / 2;
-  }
-
-  const consts = getHorizontalConsts(width);
-
-  const horizontalT1Amount =
-    Math.ceil(
-      ((length / 6) * consts.constant +
-        length * consts.longCount +
-        count * consts.horizontConsts +
-        24) /
-        12
-    ) * 12;
-
-  const horizontalT1Price = truba["60x60x3"] * horizontalT1Amount;
-
-  console.log(`Горизонтальних в'язів жорсткості (змійок) - ` + count + ` шт`);
-  console.log(`Поздовжніх - ` + consts.longCount + ` шт`);
-  console.log(`Труба 60х60х3 - ${horizontalT1Amount}` + ` м.п.;`);
-
-  return horizontalT1Price;
 }

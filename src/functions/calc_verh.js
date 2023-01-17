@@ -1,7 +1,20 @@
 //Верх колон для склада та навіса без опори
 import { prokat } from "../price_list";
 
-function getVerhConsts(width) {
+export function calcVerhWithout(width, length) {
+  const count = length / 3 + 2;
+  const consts = getVerhConsts1(width);
+
+  const verhAmount = count;
+
+  const verhPrice = consts.prokat * verhAmount;
+
+  console.log(`Верх колон ${consts.type} - ` + count + ` шт`);
+
+  return verhPrice;
+}
+
+function getVerhConsts1(width) {
   if (width <= 18) {
     return {
       prokat: prokat["250x250x10"],
@@ -18,17 +31,4 @@ function getVerhConsts(width) {
       type: "350x350x10",
     };
   }
-}
-
-export function calcVerh(width, length) {
-  const count = length / 3 + 2;
-  const consts = getVerhConsts(width);
-
-  const verhAmount = count;
-
-  const verhPrice = consts.prokat * verhAmount;
-
-  console.log(`Верх колон ${consts.type} - ` + count + ` шт`);
-
-  return verhPrice;
 }

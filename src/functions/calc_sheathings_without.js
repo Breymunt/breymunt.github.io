@@ -1,85 +1,12 @@
-//Профнастил покрівельний
+//Профнастил покрівельний без опори
 import { proflist, samorez, dobor, uplotnitel } from "../price_list";
 
-function getRoofConsts(width) {
-  if (width == 16) {
-    return {
-      l: 8.54,
-      k: 0.219,
-    };
-  } else if (width == 18) {
-    return {
-      l: 9.55,
-      k: 0.219,
-    };
-  } else if (width == 20) {
-    return {
-      l: 10.74,
-      k: 0.273,
-    };
-  } else if (width == 22) {
-    return {
-      l: 11.56,
-      k: 0.273,
-    };
-  } else if (width == 24) {
-    return {
-      l: 12.86,
-      k: 0.273,
-    };
-  } else if (width == 30) {
-    return {
-      l: 15.9,
-      k: 0.325,
-    };
-  }
-}
+//Склад без опори
 
-//Профнастил стіновий
-function getWallConsts(width) {
-  if (width == 16) {
-    return {
-      c: 5.71,
-      h: 0.8,
-      k: 0.219,
-    };
-  } else if (width == 18) {
-    return {
-      c: 5.71,
-      h: 0.9,
-      k: 0.219,
-    };
-  } else if (width == 20) {
-    return {
-      c: 12.41,
-      h: 0.3,
-      k: 0.273,
-    };
-  } else if (width == 22) {
-    return {
-      c: 5.71,
-      h: 1.1,
-      k: 0.273,
-    };
-  } else if (width == 24) {
-    return {
-      c: 5.71,
-      h: 1.2,
-      k: 0.273,
-    };
-  } else if (width == 30) {
-    return {
-      c: 6.47,
-      h: 0.8,
-      k: 0.325,
-    };
-  }
-}
-
-export function calcSheathings(width, length, height) {
+export function calcSheathingsSWOS(width, length, height) {
   //Профнастил покрівельний
 
-  const constsR = getRoofConsts(width);
+  const constsR = getRoofConstsS(width);
   const countR = Math.ceil((length + constsR.k) / 0.99) * 2;
 
   const sheetRoofAmount = Math.ceil(countR * constsR.l * 1.04);
@@ -187,4 +114,170 @@ export function calcSheathings(width, length, height) {
   return (
     sheetRoofPrice + sheetWallPrice + sealantPrice + doborPrice + samorezyPrice
   );
+}
+
+//Навіс без опори
+
+export function calcSheathingsCWOS(width, length) {
+  //Профнастил покрівельний
+
+  const constsR = getRoofConstsC(width);
+  const countR = Math.ceil((length + constsR.k) / 0.99) * 2;
+
+  const sheetRoofAmount = Math.ceil(countR * constsR.l * 1.04);
+
+  const sheetRoofPrice = proflist["60-05"] * sheetRoofAmount;
+
+  console.log(`Покрівельний профлист 60-05 - ${sheetRoofAmount}` + ` м2`);
+
+  //Ущільнювач
+
+  const countS = Math.ceil((length + constsR.k) / 0.99 + 1);
+  const sealantAmount = Math.ceil((countS * constsR.l * 2) / 30) * 30 + 60;
+
+  console.log(`Ущільнювач - ${sealantAmount}` + ` м.п.`);
+
+  //Добірні елементи
+
+  const constsW = getWallConsts(width);
+
+  const veterAmount = Math.ceil(constsR.l / 1.9) * 4;
+  const pPlankaAmount = Math.ceil((length + constsW.k) / 1.9) * 2;
+  const konekAmount = Math.ceil((length + constsW.k) / 1.9) + 1;
+  const plankyAmount = veterAmount + pPlankaAmount + konekAmount;
+
+  const veterPrice = dobor["veter"] * veterAmount;
+  const pPlankaPrice = dobor["pPlanka"] * pPlankaAmount;
+  const konekPrice = dobor["konek"] * konekAmount;
+  const doborPrice = veterPrice + pPlankaPrice + konekPrice;
+
+  console.log(`Добірних планок - ${plankyAmount}` + ` шт`);
+  console.log(`Вітрова планка - ${veterAmount}` + ` шт`);
+  console.log(`П-планка - ${pPlankaAmount}` + ` шт`);
+  console.log(`Коньок - ${konekAmount}` + ` шт`);
+
+  //Саморізи
+
+  const profListAmount = sheetRoofAmount;
+
+  const metalAmount = Math.ceil((sheetRoofAmount * 4) / 250) * 250;
+  const derevoAmount =
+    Math.ceil((profListAmount * 3 + plankyAmount * 12) / 250) * 250;
+
+  const metalPrice = samorez["metal"] * metalAmount;
+  const derevoPrice = samorez["derevo"] * derevoAmount;
+  const samorezyPrice = metalPrice + derevoPrice;
+
+  console.log(`Саморізи по металу - ${metalAmount}` + ` шт`);
+  console.log(`Саморізи по дереву - ${derevoAmount}` + ` шт`);
+
+  return sheetRoofPrice + doborPrice + samorezyPrice;
+}
+
+function getRoofConstsS(width) {
+  if (width == 16) {
+    return {
+      l: 8.54,
+      k: 0.219,
+    };
+  } else if (width == 18) {
+    return {
+      l: 9.55,
+      k: 0.219,
+    };
+  } else if (width == 20) {
+    return {
+      l: 10.74,
+      k: 0.273,
+    };
+  } else if (width == 22) {
+    return {
+      l: 11.56,
+      k: 0.273,
+    };
+  } else if (width == 24) {
+    return {
+      l: 12.86,
+      k: 0.273,
+    };
+  } else if (width == 30) {
+    return {
+      l: 15.9,
+      k: 0.325,
+    };
+  }
+}
+
+function getRoofConstsC(width) {
+  if (width == 16) {
+    return {
+      l: 8.29,
+      k: 0.219,
+    };
+  } else if (width == 18) {
+    return {
+      l: 9.3,
+      k: 0.219,
+    };
+  } else if (width == 20) {
+    return {
+      l: 10.49,
+      k: 0.273,
+    };
+  } else if (width == 22) {
+    return {
+      l: 11.31,
+      k: 0.273,
+    };
+  } else if (width == 24) {
+    return {
+      l: 12.61,
+      k: 0.273,
+    };
+  } else if (width == 30) {
+    return {
+      l: 15.65,
+      k: 0.325,
+    };
+  }
+}
+
+function getWallConsts(width) {
+  if (width == 16) {
+    return {
+      c: 5.71,
+      h: 0.8,
+      k: 0.219,
+    };
+  } else if (width == 18) {
+    return {
+      c: 5.71,
+      h: 0.9,
+      k: 0.219,
+    };
+  } else if (width == 20) {
+    return {
+      c: 12.41,
+      h: 0.3,
+      k: 0.273,
+    };
+  } else if (width == 22) {
+    return {
+      c: 5.71,
+      h: 1.1,
+      k: 0.273,
+    };
+  } else if (width == 24) {
+    return {
+      c: 5.71,
+      h: 1.2,
+      k: 0.273,
+    };
+  } else if (width == 30) {
+    return {
+      c: 6.47,
+      h: 0.8,
+      k: 0.325,
+    };
+  }
 }

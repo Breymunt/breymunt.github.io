@@ -16,7 +16,10 @@ export const truba = {
   "60x60x4": 349,
   "100x100x4": 604,
   "120x120x4": 730,
+  "160x160x4": 981,
   "100x100x5": 747,
+  "120x120x5": 904,
+  "160x160x5": 1219,
   "100x100x6": 887,
   "120x80x6": 887,
   "140x100x6": 1076,
@@ -75,7 +78,7 @@ export const uplotnitel = 4;
 
 export const polik = 533;
 
-export const reshitka = 11500;
+export const reshitka = 14500;
 
 export const furnitura = 14500;
 
@@ -90,5 +93,5 @@ export const work = {
 
 export const materials = {
   sklad: 75,
-  navis: 65,
+  navis: 60,
 };
