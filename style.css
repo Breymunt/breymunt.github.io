@@ -95,6 +95,8 @@ body {
   text-align: center;
   box-sizing: border-box;
   border-bottom: 1px solid lightgray;
+  font-size: 18px;
+  font-family: Arial;
 }
 
 .radio input:checked + label {
