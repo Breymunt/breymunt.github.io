@@ -87,8 +87,8 @@ export const beton = 2600;
 export const plita = 1200;
 
 export const work = {
-  sklad: 660,
-  navis: 500,
+  sklad: 710,
+  navis: 560,
 };
 
 export const materials = {

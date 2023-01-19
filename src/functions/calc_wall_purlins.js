@@ -1,6 +1,21 @@
 //Стінова обрешітка
 import { truba } from "../price_list";
 
+export function calcWallPurlins(width, length, height) {
+  const consts = getWallPurlinsConsts(width, height);
+  const count = Math.ceil(consts.h / 1.04 + 1);
+  const p = (width + length) * 2;
+
+  const wallPurlinsAmount = Math.ceil((p * count + consts.c + 36) / 12) * 12;
+
+  const wallPurlinsPrice = truba["40x40x3"] * wallPurlinsAmount;
+
+  console.log(`Стінових прогонів - ` + count + ` шт`);
+  console.log(`Труба 40х40х3 - ${wallPurlinsAmount}` + ` м.п.;`);
+
+  return wallPurlinsPrice;
+}
+
 function getWallPurlinsConsts(width, height) {
   if (width == 16) {
     return {
@@ -38,19 +53,4 @@ function getWallPurlinsConsts(width, height) {
       c: 120,
     };
   }
-}
-
-export function calcWallPurlins(width, length, height) {
-  const consts = getWallPurlinsConsts(width, height);
-  const count = Math.ceil(consts.h / 1.04 + 1);
-  const p = (width + length) * 2;
-
-  const wallPurlinsAmount = Math.ceil((p * count + consts.c + 36) / 12) * 12;
-
-  const wallPurlinsPrice = truba["40x40x3"] * wallPurlinsAmount;
-
-  console.log(`Стінових прогонів - ` + count + ` шт`);
-  console.log(`Труба 40х40х3 - ${wallPurlinsAmount}` + ` м.п.;`);
-
-  return wallPurlinsPrice;
 }
