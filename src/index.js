@@ -23,8 +23,6 @@ document.getElementById("form").addEventListener("submit", function (e) {
     return square;
   }
 
-  //`
-
   let sum = 0;
   sum += calcFunction(width, length, height, snowArea, type) + workPrice;
 
