@@ -4,6 +4,14 @@ import { calcWorkPrice } from "./functions/calc_work_price";
 
 import { priceFormat, numberFormat } from "./helpers";
 
+document.getElementById("form").type.forEach(function (el) {
+  el.addEventListener("change", function (e) {
+    e.preventDefault();
+    document.getElementById("form").reset();
+    this.checked = true;
+  });
+});
+
 document.getElementById("form").addEventListener("submit", function (e) {
   e.preventDefault();
   const form = new FormData(e.target);
@@ -39,3 +47,5 @@ document.getElementById("form").addEventListener("submit", function (e) {
   squareMeter.value =
     numberFormat(Math.ceil(sum / calcSquare(width, length))) + " грн/м2";
 });
+
+document.querySelector(".form_radio_group input");
