@@ -87,8 +87,14 @@ export const beton = 2600;
 export const plita = 1200;
 
 export const work = {
-  sklad: 710,
-  navis: 560,
+  sklad: [
+    { price: 1050, maxSquare: 1200 },
+    { price: 710, maxSquare: -1 },
+  ],
+  navis: [
+    { price: 860, maxSquare: 1000 },
+    { price: 560, maxSquare: -1 },
+  ],
 };
 
 export const materials = {
